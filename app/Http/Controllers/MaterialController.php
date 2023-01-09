@@ -35,6 +35,7 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
+        //a partir daqui realizar o primeiro insert
         $dataForm = $request->except('_token');
         return $dataForm;
     }
