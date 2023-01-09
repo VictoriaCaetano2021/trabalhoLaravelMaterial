@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Material;
 
 class MaterialController extends Controller
 {
@@ -37,6 +38,17 @@ class MaterialController extends Controller
     {
         //a partir daqui realizar o primeiro insert
         $dataForm = $request->except('_token');
+        $material = new Material();
+        // $insert = Material::create([
+        //     'nome'=>$dataForm->nome,
+        //     'imagem'=>$dataForm->imagem,
+        //     'descricao'=>$dataForm->descricao,
+        //     'setor'=>$dataForm->setor,
+
+        // ]);
+        $insert = Material::create($dataForm);
+
+
         return $dataForm;
     }
 
