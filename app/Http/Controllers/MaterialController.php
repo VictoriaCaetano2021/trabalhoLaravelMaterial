@@ -14,7 +14,7 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        return "oi, funcionou a rota index";
+        return view('menuMaterial');
     }
 
     /**
@@ -24,7 +24,7 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        return view('materialCreate');
     }
 
     /**
@@ -35,7 +35,8 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->except('_token');
+        return $dataForm;
     }
 
     /**

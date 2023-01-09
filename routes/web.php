@@ -14,11 +14,18 @@ use App\Http\Controllers\MaterialController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('menuMaterial');
 });
 
-
 Route::resource('material', MaterialController::class)->middleware(['auth']);
+// Verb	URI	Action	Route Name
+// GET	/material	index	material.index
+// GET	/material/create	create	material.create
+// POST	/material	store	material.store
+// GET	/material/{material}	show	material.show
+// GET	/material/{material}/edit	edit	material.edit
+// PUT/PATCH	/material/{material}	update	material.update
+// DELETE	/material/{material}	destroy	material.destroy
 
 
 Auth::routes();
