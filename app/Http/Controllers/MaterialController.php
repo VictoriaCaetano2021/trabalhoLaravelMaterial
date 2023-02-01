@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Material;
 
+use Illuminate\Support\Facades\Storage;
+
+
 class MaterialController extends Controller
 {
     /**
@@ -15,7 +18,8 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        return view('menuMaterial');
+        $materials = Material::orderBy('id')->paginate(5);
+        return view('menuMaterial', compact('materials'));
     }
 
     /**
@@ -36,20 +40,24 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //a partir daqui realizar o primeiro insert
+        
         $dataForm = $request->except('_token');
-        $material = new Material();
-        // $insert = Material::create([
-        //     'nome'=>$dataForm->nome,
-        //     'imagem'=>$dataForm->imagem,
-        //     'descricao'=>$dataForm->descricao,
-        //     'setor'=>$dataForm->setor,
 
-        // ]);
-        $insert = Material::create($dataForm);
+        //image temp path
+        $dataForm['imagem'];
+      
+        $newName = uniqid(). $request->file('imagem')->getClientOriginalName();
+        
+        $request->file('imagem')->storeAs('img',$newName);
 
+        $dataForm['imagem'] = Storage::Path($request->file('imagem')->storeAs('img',$newName));
+       
+        Material::create($dataForm);
 
-        return $dataForm;
+        //return (Storage::Path($request->file('imagem')->storeAs('img',$newName)));
+       
+        return redirect()->route('material.index');
+        
     }
 
     /**
@@ -60,8 +68,13 @@ class MaterialController extends Controller
      */
     public function show($id)
     {
-        //
+        $material = Material::find($id);
+
+       return view('updateMaterial', compact('material'));
+
+      
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -94,6 +107,40 @@ class MaterialController extends Controller
      */
     public function destroy($id)
     {
-        //
+       //
     }
+
+
+    public function delete($id)
+    {
+        Material::destroy($id);
+        return redirect()->route('material.index');
+    }
+
+    public function editar(Request $request, $id)
+    {
+
+        $material = Material::find($id);
+
+        if($request->nome!=null)
+        {
+            $material->nome = $request->nome;
+        }
+        if($request->descricao!=null)
+        {
+            $material->descricao = $request->descricao;
+        }
+        if($request->setor!=null)
+        {
+            $material->setor = $request->setor;
+        }
+        if($request->descricao!=null)
+        {
+            $material->descricao = $request->descricao;
+        }
+        $material->save();
+
+        return redirect()->route('material.index');
+    }
+
 }

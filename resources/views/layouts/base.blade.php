@@ -23,15 +23,6 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ route('material.create') }}">Create</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="">Read</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Update</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Delete</a>
-      </li>
     </ul>
 </div>
 <span class="navbar-text">
@@ -48,7 +39,11 @@
     <div class="row">
         <div class="col-md-10 offset-md-1">
            
-                @yield('formCreate')            
+                @yield('formCreate') 
+
+                @yield('paginate') 
+
+                @yield('formUpdate')        
         </div>
     </div>
 

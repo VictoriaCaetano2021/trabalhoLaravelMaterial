@@ -13,11 +13,14 @@ use App\Http\Controllers\MaterialController;
 |
 */
 
-Route::get('/', function () {
-    return view('menuMaterial');
-});
+// Route::get('/', function () {
+//     return view('menuMaterial');
+// });
+
+Route::get('/', [MaterialController::class, 'index'])->name('home');//->middleware(['auth']);
 
 Route::resource('material', MaterialController::class)->middleware(['auth']);
+
 // Verb	URI	Action	Route Name
 // GET	/material	index	material.index
 // GET	/material/create	create	material.create
@@ -30,4 +33,6 @@ Route::resource('material', MaterialController::class)->middleware(['auth']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/material/{material}/delete', [ MaterialController::class, 'delete'])->middleware(['auth']);
+Route::post('/material/{material}/editar', [ MaterialController::class, 'editar'])->middleware(['auth']);
