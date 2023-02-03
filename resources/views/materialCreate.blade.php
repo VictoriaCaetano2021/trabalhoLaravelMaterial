@@ -12,7 +12,7 @@
 <div class="jumbotron jumbotron-fluid bg-light">
 <div class="row">
   <div class="col-md-6 offset-md-3">
-        <form method="POST" enctype="multipart/form-data" action="{{route('material.store')}}">
+        <form method="POST" enctype="multipart/form-data"   action="{{route('material.store')}}">
         @csrf
             <div class="form-group">
                 <label for="exampleFormControlInput1">Nome</label>
@@ -21,13 +21,13 @@
             <div class="form-group">
             <label for="exampleFormControlInput1">Imagem</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01"  name="imagem">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"  name="imagem"/>
                     <label class="custom-file-label" for="inputGroupFile01">Escolha a imagem</label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Setor</label>
-                <input class="form-control" type="text" name="setor" placeholder="nome de material">
+                <input class="form-control" type="text" name="setor" placeholder="nome de material"/>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Descrição</label>

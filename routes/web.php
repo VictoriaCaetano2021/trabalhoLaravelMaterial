@@ -36,3 +36,4 @@ Auth::routes();
 
 Route::get('/material/{material}/delete', [ MaterialController::class, 'delete'])->middleware(['auth']);
 Route::post('/material/{material}/editar', [ MaterialController::class, 'editar'])->middleware(['auth']);
+Route::get('/material/{material}/verImagem', [ MaterialController::class, 'verImagem'])->middleware(['auth']);

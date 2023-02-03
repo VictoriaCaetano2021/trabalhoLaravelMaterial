@@ -40,25 +40,45 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $dataForm = $request->except('_token');
+        // $validate = Validator::make($request->all(), [
+        //     'nome' => 'required|min:5',
+        //     'setor' => 'required',
+        //     'setor' => 'required',
+        //     'imagem' => 'required',
+        // ],[
+        //     'nome.required' => 'nome é obrigatório'
+        // ]);
 
-        //image temp path
-        $dataForm['imagem'];
-      
-        $newName = uniqid(). $request->file('imagem')->getClientOriginalName();
-        
-        $request->file('imagem')->storeAs('img',$newName);
+        // if($validate->fails()){
+        //     return back()->withErrors($validate->errors())->withInput();
+        // }
 
-        $dataForm['imagem'] = Storage::Path($request->file('imagem')->storeAs('img',$newName));
+        if(($request->nome!=null || $request->nome!="") && ($request->setor!=null || $request->setor!="") && ($request->descricao!=null || $request->descricao!="") && ($request->imagem!=null || $request->imagem!=""))
+        {
+            
+            $dataForm = $request->except('_token');
+            
+            $newName = uniqid(). $request->file('imagem')->getClientOriginalName();
+            
+            $request->file('imagem')->storeAs('img',$newName);
+            
+            // $dataForm['imagem'] = Storage::Path($request->file('imagem')->storeAs('public/imagens',$newName));
+            $dataForm['imagem'] = $request->file('imagem')->storeAs('public/images',$newName);
+
+            //$dataForm['imagem'] = str_replace("/","\\", $dataForm['imagem']);
+            
+            Material::create($dataForm);
        
-        Material::create($dataForm);
-
-        //return (Storage::Path($request->file('imagem')->storeAs('img',$newName)));
-       
+        }
         return redirect()->route('material.index');
-        
     }
+
+    public function verImagem($id)
+    {
+        $material = Material::find($id);
+        return view('verImagem', compact('material'));
+    }
+
 
     /**
      * Display the specified resource.

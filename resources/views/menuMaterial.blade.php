@@ -12,7 +12,6 @@
 
 
 @section('paginate')
-<div class="jumbotron jumbotron-fluid bg-light">
 <!-- <div class="row"> -->
    
   <table class="table table-hover table-striped">
@@ -25,6 +24,7 @@
         <th scope="col">imagem</th>
         <th scope="col">Editar</th>
         <th scope="col">Apagar</th>
+        <th scope="col">Imagem</th>
     </tr>
  </thead>
     <tbody>
@@ -35,8 +35,9 @@
             <td>{{ $m->setor }}</td>
             <td>{{ $m->imagem }}</td>
             <td><a href="material/{{$m['id']}}">editar</a></td>
-           
             <td><a href="material/{{$m['id']}}/delete">deletar</a></td>
+            <td><a href="material/{{$m['id']}}/verImagem">ver</a></td>
+
         </tr>
         
         @endforeach
@@ -45,5 +46,4 @@
     {{ $materials->links() }} 
 
 <!-- </div> -->
-</div>
 @endsection

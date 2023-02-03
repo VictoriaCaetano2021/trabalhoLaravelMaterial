@@ -43,7 +43,9 @@
 
                 @yield('paginate') 
 
-                @yield('formUpdate')        
+                @yield('formUpdate')     
+                
+                @yield('verImagem') 
         </div>
     </div>
 
